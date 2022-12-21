@@ -15,6 +15,7 @@ namespace Nomtek.Source.Gameplay.Item.Model
         public GameObject Prefab => prefab;
 
         Texture2D thumbnailImage;
-        public Texture2D ThumbnailImage => thumbnailImage??=AssetPreview.GetMiniThumbnail(prefab);
+        //Ideally we'd have a url reference to the image and have some ResourceProvider that would fetch and release the image when needed and not needed in the UI views.
+        public Texture2D ThumbnailImage => thumbnailImage??=AssetPreview.GetMiniThumbnail(prefab); 
     }
 }
