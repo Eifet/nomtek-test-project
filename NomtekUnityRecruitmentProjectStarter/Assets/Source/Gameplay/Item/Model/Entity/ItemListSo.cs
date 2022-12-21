@@ -10,6 +10,7 @@ namespace Nomtek.Source.Gameplay.Item.Model
         [SerializeField]
         List<ItemSo> itemList = new();
 
-        public List<ItemSo> ItemList => itemList.ToList();
+        List<IItem> itemListInternal;
+        public List<IItem> ItemList => itemListInternal??=itemList.Cast<IItem>().ToList();
     }
 }

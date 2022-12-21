@@ -4,6 +4,6 @@ namespace Nomtek.Source.Gameplay.Item.Model
 {
     public interface IItemList
     {
-        List<ItemSo> ItemList { get; }
+        List<IItem> ItemList { get; }
     }
 }
