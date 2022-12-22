@@ -1,18 +1,16 @@
 ﻿using System.Collections.Generic;
+using Nomtek.Source.Gameplay.Model;
 using Zenject;
 
 namespace Nomtek.Source.Gameplay.Item.Model
 {
     public interface IItemModel
     {
-        List<IItem> ItemList { get; }
+        LiveData<List<IItem>> ItemList { get; }
     }
-    
+
     public class ItemModel : IItemModel
     {
-        [Inject]
-        IItemList itemList;
-        
-        public List<IItem> ItemList => itemList.ItemList;
+        public LiveData<List<IItem>> ItemList { get; } = new();
     }
 }

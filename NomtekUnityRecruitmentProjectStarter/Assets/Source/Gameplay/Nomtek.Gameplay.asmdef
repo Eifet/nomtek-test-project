@@ -2,7 +2,7 @@
     "name": "Nomtek.Gameplay",
     "rootNamespace": "Nomtek",
     "references": [
-    ],
+    "GUID:47f6919186814742bf77f1f4b6ecb217"],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

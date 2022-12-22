@@ -1,0 +1,17 @@
+{
+  "name": "Nomtek.Gameplay.GameplayFlow",
+  "rootNamespace": "Nomtek",
+  "references": [
+    "GUID:47f6919186814742bf77f1f4b6ecb217",
+    "GUID:e707c6f08c734c07ab685dca60302a6b"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

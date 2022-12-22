@@ -11,7 +11,8 @@ namespace Nomtek.Source.Gameplay.Item
         
         public override void InstallBindings()
         {
-            Container.Bind<IItemModel>().To<ItemModel>().AsSingle().WithArguments(itemListSo);
+            Container.BindInstance(itemListSo).AsTransient();
+            Container.Bind<IItemModel>().To<ItemModel>().AsSingle();
         }
     }
 }
