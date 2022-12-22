@@ -1,14 +1,24 @@
 ﻿using System;
+using UniRx;
 using UnityEngine;
+using Zenject;
 
 namespace Nomtek.Source.Gameplay.Controller
 {
-    public class InputHandler : MonoBehaviour
+    public class InputHandler
     {
         public event Action<Vector2> OnClick; 
         public event Action OnInputCancel;
 
-        void Update()
+        [Inject]
+        void Initialize()
+        {
+            Observable
+                .EveryUpdate()
+                .Subscribe(_ => CheckInput());
+        }
+
+        void CheckInput()
         {
             if(Input.GetKeyUp(KeyCode.Escape))
                 OnInputCancel?.Invoke();

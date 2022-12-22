@@ -6,12 +6,9 @@ namespace Nomtek.Source.Gameplay
 {
     public class GameplayCoreMonoInstaller : MonoInstaller
     {
-        [SerializeField]
-        InputHandler inputHandler;
-
         public override void InstallBindings()
         {
-            Container.BindInstance(inputHandler).AsSingle();
+            Container.Bind<InputHandler>().AsSingle();
         }
     }
 }
