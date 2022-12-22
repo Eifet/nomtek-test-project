@@ -8,7 +8,7 @@ namespace Nomtek.Source.Ui.ItemGridUi.View.SubView
     {
         public event Action<IItem> OnItemClicked;
         
-        IItem item;
+        public IItem Item;
 
         void OnEnable()
         {
@@ -22,13 +22,13 @@ namespace Nomtek.Source.Ui.ItemGridUi.View.SubView
 
         public void Configure(IItem item)
         {
-            this.item = item;
+            this.Item = item;
             View.Configure(item.ItemName,item.ThumbnailImage);
         }
 
         void OnClicked()
         {
-            OnItemClicked?.Invoke(item);
+            OnItemClicked?.Invoke(Item);
         }
     }
 }

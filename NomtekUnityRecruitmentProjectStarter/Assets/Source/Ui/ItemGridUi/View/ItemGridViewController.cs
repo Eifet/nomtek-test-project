@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Nomtek.Source.Gameplay.Item.Model;
 using Nomtek.Source.Ui._Ui.Controller;
 using Nomtek.Source.Ui._Ui.View;
@@ -21,15 +22,21 @@ namespace Nomtek.Source.Ui.ItemGridUi.View
 
         [Inject]
         IItemModel itemModel;
-        
+
+        List<ItemViewController> itemList = new();
+
         void OnEnable()
         {
+            View.OnInputFieldChanged += OnInputFieldChanged;
+            
             itemModel.ItemList.OnChanged += OnItemListChanged;
             OnItemListChanged(itemModel.ItemList.Data);
         }
 
         void OnDisable()
         {
+            View.OnInputFieldChanged -= OnInputFieldChanged;
+            
             itemModel.ItemList.OnChanged -= OnItemListChanged;
         }
 
@@ -37,9 +44,12 @@ namespace Nomtek.Source.Ui.ItemGridUi.View
 
         public void CloseView() => View.CloseView();
 
+        #region List management
+
         void OnItemListChanged(List<IItem> items)
         {
             View.ClearList();
+            itemList.Clear();
             
             foreach (var item in items) 
                 CreateItemView(item);
@@ -50,7 +60,8 @@ namespace Nomtek.Source.Ui.ItemGridUi.View
             var itemViewController = viewFactory.Create<ItemViewController>(itemViewPrefab.gameObject);
             itemViewController.Configure(item);
             itemViewController.OnItemClicked += OnItemClicked;
-            
+            itemList.Add(itemViewController);
+
             View.AddItemToList(itemViewController.transform);
         }
 
@@ -58,5 +69,18 @@ namespace Nomtek.Source.Ui.ItemGridUi.View
         {
             OnItemChosen?.Invoke(item);
         }
+
+        #endregion
+
+        #region List filtering
+
+        void OnInputFieldChanged(string filter)
+        {
+            itemList.ForEach(x => x.gameObject.SetActive(true));
+            var filteredList = itemList.FindAll(x => !x.Item.ItemName.ToLowerInvariant().StartsWith(filter.ToLowerInvariant()));
+            filteredList.ForEach(x => x.gameObject.SetActive(false));
+        }
+
+        #endregion
     }
 }
