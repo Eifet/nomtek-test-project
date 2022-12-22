@@ -59,7 +59,7 @@ namespace Nomtek.Source.Ui.ItemGridUi.View
 
         void OnInputChanged(string input)
         {
-            OnInputFieldChanged?.Invoke(input);
+            OnInputFieldChanged?.Invoke(input.ToLowerInvariant());
         }
     }
 }

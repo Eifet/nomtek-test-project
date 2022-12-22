@@ -13,22 +13,22 @@ namespace Nomtek.Source.Ui.ItemGridUi.View
     public class ItemGridViewController : ViewControllerMono<ItemGridView>
     {
         public event Action<IItem> OnItemChosen;
-        
+
         [SerializeField]
         ItemViewController itemViewPrefab;
-        
+
         [Inject]
         ViewFactory viewFactory;
 
         [Inject]
         IItemModel itemModel;
 
-        List<ItemViewController> itemList = new();
+        IEnumerable<IGrouping<string, ItemViewController>> itemListGroups;
 
         void OnEnable()
         {
             View.OnInputFieldChanged += OnInputFieldChanged;
-            
+
             itemModel.ItemList.OnChanged += OnItemListChanged;
             OnItemListChanged(itemModel.ItemList.Data);
         }
@@ -36,7 +36,7 @@ namespace Nomtek.Source.Ui.ItemGridUi.View
         void OnDisable()
         {
             View.OnInputFieldChanged -= OnInputFieldChanged;
-            
+
             itemModel.ItemList.OnChanged -= OnItemListChanged;
         }
 
@@ -49,20 +49,25 @@ namespace Nomtek.Source.Ui.ItemGridUi.View
         void OnItemListChanged(List<IItem> items)
         {
             View.ClearList();
-            itemList.Clear();
-            
-            foreach (var item in items) 
-                CreateItemView(item);
+
+            var itemList = new List<ItemViewController>();
+            foreach (var item in items)
+            {
+                var itemViewController = CreateItemView(item);
+                itemList.Add(itemViewController);
+            }
+
+            itemListGroups = itemList.GroupBy(x => x.Item.ItemName.ToLowerInvariant());
         }
 
-        void CreateItemView(IItem item)
+        ItemViewController CreateItemView(IItem item)
         {
             var itemViewController = viewFactory.Create<ItemViewController>(itemViewPrefab.gameObject);
             itemViewController.Configure(item);
             itemViewController.OnItemClicked += OnItemClicked;
-            itemList.Add(itemViewController);
-
             View.AddItemToList(itemViewController.transform);
+
+            return itemViewController;
         }
 
         void OnItemClicked(IItem item)
@@ -74,11 +79,34 @@ namespace Nomtek.Source.Ui.ItemGridUi.View
 
         #region List filtering
 
+        //Filtering by groups with StartsWith
         void OnInputFieldChanged(string filter)
         {
-            itemList.ForEach(x => x.gameObject.SetActive(true));
-            var filteredList = itemList.FindAll(x => !x.Item.ItemName.ToLowerInvariant().StartsWith(filter.ToLowerInvariant()));
-            filteredList.ForEach(x => x.gameObject.SetActive(false));
+            EnableAllItems();
+            DisableItemsByFilter(filter);
+        }
+
+        void EnableAllItems()
+        {
+            foreach (var group in itemListGroups)
+            {
+                foreach (var itemViewController in group)
+                {
+                    itemViewController.gameObject.SetActive(true);
+                }
+            }
+        }
+
+        void DisableItemsByFilter(string filter)
+        {
+            foreach (var group in itemListGroups)
+            {
+                if (!group.Key.StartsWith(filter))
+                {
+                    foreach (var item in group)
+                        item.gameObject.SetActive(false);
+                }
+            }
         }
 
         #endregion
