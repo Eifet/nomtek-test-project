@@ -1,5 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Linq;
 using Nomtek.Source.Gameplay.Item.Model;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -16,28 +19,24 @@ namespace Nomtek.Source.Gameplay.GameplayFlow.States
 
         [Inject]
         IItemModel itemModel;
-        
+
         void OnEnable()
         {
             Debug.Log("InitialState");
-            
-            itemModel.ItemList.Data = itemListSo.ItemList;
 
-            StartCoroutine(GoToNextStateWithDelay());
+            itemListSo.Initialize(OnItemListInitialized);
         }
 
         void OnDisable()
         {
-            
         }
 
-        //Artificially waiting for Unity to fetch thumbnails and wake up. 
-        IEnumerator GoToNextStateWithDelay()
+        void OnItemListInitialized()
         {
-            yield return new WaitForSeconds(1f);
+            itemModel.ItemList.Data = itemListSo.ItemList;
             GoToNextState();
         }
-
+        
         void GoToNextState()
         {
             gameObject.SetActive(false);
