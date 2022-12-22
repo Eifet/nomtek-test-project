@@ -33,7 +33,7 @@ RectTransform:
   m_Children:
   - {fileID: 8689019286646461802}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -114,6 +114,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ItemGridView
+      objectReference: {fileID: 0}
+    - target: {fileID: 685972395087779202, guid: 0a961f1c53611c84fa8c5782ede2e4b1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1936880642680549191, guid: 0a961f1c53611c84fa8c5782ede2e4b1,
         type: 3}
@@ -223,37 +228,37 @@ PrefabInstance:
     - target: {fileID: 2705820592194489907, guid: 0a961f1c53611c84fa8c5782ede2e4b1,
         type: 3}
       propertyPath: m_Size
+      value: 0.9998501
+      objectReference: {fileID: 0}
+    - target: {fileID: 4253615422957969495, guid: 0a961f1c53611c84fa8c5782ede2e4b1,
+        type: 3}
+      propertyPath: m_AnchorMax.x
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4253615422957969495, guid: 0a961f1c53611c84fa8c5782ede2e4b1,
         type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4253615422957969495, guid: 0a961f1c53611c84fa8c5782ede2e4b1,
-        type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4253615422957969495, guid: 0a961f1c53611c84fa8c5782ede2e4b1,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -17
       objectReference: {fileID: 0}
     - target: {fileID: 4294383664582921958, guid: 0a961f1c53611c84fa8c5782ede2e4b1,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4294383664582921958, guid: 0a961f1c53611c84fa8c5782ede2e4b1,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 0.9998501
       objectReference: {fileID: 0}
     - target: {fileID: 8576851775571191752, guid: 0a961f1c53611c84fa8c5782ede2e4b1,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000009479245
+      value: 0.000764231
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

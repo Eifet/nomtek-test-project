@@ -181,6 +181,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneContext
       objectReference: {fileID: 0}
+    - target: {fileID: 7150937209997012519, guid: b602782c5a32c9f42835e90204a4b3e5,
+        type: 3}
+      propertyPath: itemGridView
+      value: 
+      objectReference: {fileID: 3768499073379939035}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: b602782c5a32c9f42835e90204a4b3e5, type: 3}
@@ -201,7 +206,7 @@ PrefabInstance:
     - target: {fileID: 1545771034412588517, guid: ef9e4458121072049aaf2f081f41bc51,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.0003865853
+      value: 0.0001434491
       objectReference: {fileID: 0}
     - target: {fileID: 3025981410848449657, guid: ef9e4458121072049aaf2f081f41bc51,
         type: 3}
@@ -313,6 +318,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5186377457274057758, guid: ef9e4458121072049aaf2f081f41bc51,
+        type: 3}
+      propertyPath: m_Size
+      value: 0.99895334
+      objectReference: {fileID: 0}
     - target: {fileID: 6445591283507468922, guid: ef9e4458121072049aaf2f081f41bc51,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -341,6 +351,18 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: ef9e4458121072049aaf2f081f41bc51, type: 3}
+--- !u!114 &3768499073379939035 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5905684872901319808, guid: ef9e4458121072049aaf2f081f41bc51,
+    type: 3}
+  m_PrefabInstance: {fileID: 7329978838528388699}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d8f4bed47a549baa82d48a502b55121, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &5496400238834076198 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3025981410848449661, guid: ef9e4458121072049aaf2f081f41bc51,

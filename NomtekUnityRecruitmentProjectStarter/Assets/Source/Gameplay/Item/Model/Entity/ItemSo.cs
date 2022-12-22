@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System;
+using UnityEditor;
 using UnityEngine;
 
 namespace Nomtek.Source.Gameplay.Item.Model
@@ -14,8 +15,12 @@ namespace Nomtek.Source.Gameplay.Item.Model
         GameObject prefab;
         public GameObject Prefab => prefab;
 
-        Texture2D thumbnailImage;
-        //Ideally we'd have a url reference to the image and have some ResourceProvider that would fetch and release the image when needed and not needed in the UI views.
-        public Texture2D ThumbnailImage => thumbnailImage??=AssetPreview.GetMiniThumbnail(prefab); 
+        //Ideally we'd have a url reference to the image and have some ResourceProvider with some Promise that would fetch and release the image when needed and not needed in the UI views.
+        public Texture2D ThumbnailImage { get; private set; }
+
+        public void Initialize()
+        {
+            ThumbnailImage = AssetPreview.GetAssetPreview(prefab);
+        }
     }
 }

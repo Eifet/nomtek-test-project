@@ -1,4 +1,5 @@
-﻿using Nomtek.Source.Gameplay.Item.Model;
+﻿using System.Collections;
+using Nomtek.Source.Gameplay.Item.Model;
 using UnityEngine;
 using Zenject;
 
@@ -21,12 +22,20 @@ namespace Nomtek.Source.Gameplay.GameplayFlow.States
             Debug.Log("InitialState");
             
             itemModel.ItemList.Data = itemListSo.ItemList;
-            GoToNextState();
+
+            StartCoroutine(GoToNextStateWithDelay());
         }
 
         void OnDisable()
         {
             
+        }
+
+        //Artificially waiting for Unity to fetch thumbnails and wake up. 
+        IEnumerator GoToNextStateWithDelay()
+        {
+            yield return new WaitForSeconds(3f);
+            GoToNextState();
         }
 
         void GoToNextState()

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Nomtek.Source.Gameplay.Item.Model;
 using Nomtek.Source.Ui._Ui.Controller;
 using Nomtek.Source.Ui._Ui.View;
@@ -11,7 +12,7 @@ namespace Nomtek.Source.Ui.ItemGridUi.View
     public class ItemGridViewController : ViewControllerMono<ItemGridView>
     {
         [SerializeField]
-        GameObject itemViewPrefab;
+        ItemViewController itemViewPrefab;
         
         [Inject]
         ViewFactory viewFactory;
@@ -21,18 +22,29 @@ namespace Nomtek.Source.Ui.ItemGridUi.View
         
         void OnEnable()
         {
-            
+            itemModel.ItemList.OnChanged += OnItemListChanged;
+            OnItemListChanged(itemModel.ItemList.Data);
         }
 
         void OnDisable()
         {
+            itemModel.ItemList.OnChanged -= OnItemListChanged;
+        }
+
+        void OnItemListChanged(List<IItem> items)
+        {
+            View.ClearList();
             
+            foreach (var item in items) 
+                CreateItemView(item);
         }
 
         void CreateItemView(IItem item)
         {
-            var itemViewController = viewFactory.Create<ItemViewController>(itemViewPrefab);
+            var itemViewController = viewFactory.Create<ItemViewController>(itemViewPrefab.gameObject);
             itemViewController.Configure(item);
+            
+            View.AddItemToList(itemViewController.transform);
         }
     }
 }

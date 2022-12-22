@@ -144,6 +144,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4157024807807609823}
+  - component: {fileID: 6560206590349017051}
+  - component: {fileID: 1585092628408143056}
   m_Layer: 5
   m_Name: ItemView
   m_TagString: Untagged
@@ -173,6 +175,32 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6560206590349017051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3902682283449164044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1b66a4a24f948faac5ac787da357492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: {fileID: 932096942094655440}
+  thumbnail: {fileID: 6858516552771248183}
+--- !u!114 &1585092628408143056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3902682283449164044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6d22ee900b242609ff62fd4d67084c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5481607600436036309
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,7 +363,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1096086940992773130}
   m_Layer: 5
-  m_Name: Thumbnail
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
