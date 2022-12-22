@@ -9,7 +9,7 @@ namespace Nomtek.Source.Gameplay.Item.Model
         LiveData<List<IItem>> ItemList { get; }
     }
 
-    public class ItemModel : IItemModel
+    class ItemModel : IItemModel
     {
         public LiveData<List<IItem>> ItemList { get; } = new();
     }

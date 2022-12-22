@@ -11,9 +11,9 @@ namespace Nomtek.Source.Gameplay.Item.Model
         List<ItemSo> itemList = new();
 
         List<IItem> itemListInternal;
-        public List<IItem> ItemList => itemListInternal??=InitializeList();
+        public List<IItem> ItemList => itemListInternal;
 
-        List<IItem> InitializeList()
+        public List<IItem> InitializeList()
         {
             foreach (var itemSo in itemList) 
                 itemSo.Initialize();

@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: BlueItem
   m_EditorClassIdentifier: 
   itemName: Blue Item
-  prefab: {fileID: 5367430228554191562, guid: ebb592773d5806e4191a82dcf6f0a5ad, type: 3}
+  placementPrefab: {fileID: 5367430228554191562, guid: ebb592773d5806e4191a82dcf6f0a5ad,
+    type: 3}
+  stagePrefab: {fileID: 281380832256612106, guid: 4dd6401877818154dacea453c62b68c3,
+    type: 3}

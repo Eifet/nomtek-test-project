@@ -17,6 +17,9 @@ namespace Nomtek.Source.Gameplay.GameplayFlow.States
         [Inject]
         ItemGridViewController itemGridView;
 
+        [Inject]
+        ISelectedItemModel selectedItemModel;
+
         void OnEnable()
         {
             Debug.Log("GameState");
@@ -38,16 +41,19 @@ namespace Nomtek.Source.Gameplay.GameplayFlow.States
         void OnItemChosen(IItem item)
         {
             Debug.Log($"OnItemChosen {item.ItemName}");
+            selectedItemModel.SelectedItem.Data = item;
             itemGridView.CloseView();
         }
 
         void OnItemPlaced()
         {
-            
+            selectedItemModel.SelectedItem.Data = null;
+            itemGridView.OpenView();
         }
 
         void OnCancel()
         {
+            selectedItemModel.SelectedItem.Data = null;
             itemGridView.OpenView();
         }
     }

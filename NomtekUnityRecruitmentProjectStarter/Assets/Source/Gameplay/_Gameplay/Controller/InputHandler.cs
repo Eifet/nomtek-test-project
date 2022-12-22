@@ -1,20 +1,25 @@
 ﻿using System;
 using UniRx;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Zenject;
 
 namespace Nomtek.Source.Gameplay.Controller
 {
     public interface IInputHandler
     {
-        event Action<Vector2> OnClick; 
+        public event Action<Vector3> OnMousePositionChanged; 
+        event Action<Vector3> OnClick; 
         event Action OnInputCancel;
     }
     
     public class InputHandler : IInputHandler
     {
-        public event Action<Vector2> OnClick; 
+        public event Action<Vector3> OnMousePositionChanged; 
+        public event Action<Vector3> OnClick; 
         public event Action OnInputCancel;
+
+        Vector3 currentMousePosition;
 
         [Inject]
         void Initialize()
@@ -22,15 +27,27 @@ namespace Nomtek.Source.Gameplay.Controller
             Observable
                 .EveryUpdate()
                 .Subscribe(_ => CheckInput());
+
+            Observable
+                .EveryUpdate()
+                .Where(_ => currentMousePosition != Input.mousePosition)
+                .Subscribe(_ =>
+                {
+                    currentMousePosition = Input.mousePosition;
+                    OnMousePositionChanged?.Invoke(currentMousePosition);
+                });
         }
 
         void CheckInput()
         {
             if(Input.GetKeyUp(KeyCode.Escape))
                 OnInputCancel?.Invoke();
-            
-            if(Input.GetMouseButtonUp(0))
-                OnClick?.Invoke(new Vector2(Input.mousePosition.x,Input.mousePosition.y));
+
+            if (Input.GetMouseButtonUp(0) && !EventSystem.current.IsPointerOverGameObject())
+            {
+                OnClick?.Invoke(Input.mousePosition);
+            }
+                
         }
     }
 }

@@ -10,17 +10,21 @@ namespace Nomtek.Source.Gameplay.Item.Model
         [SerializeField]
         string itemName;
         public string ItemName => itemName;
-        
+
         [SerializeField]
-        GameObject prefab;
-        public GameObject Prefab => prefab;
+        GameObject placementPrefab;
+        public GameObject PlacementPrefab => placementPrefab;
+
+        [SerializeField]
+        GameObject stagePrefab;
+        public GameObject StagePrefab => stagePrefab;
 
         //Ideally we'd have a url reference to the image and have some ResourceProvider with some Promise that would fetch and release the image when needed and not needed in the UI views.
         public Texture2D ThumbnailImage { get; private set; }
 
         public void Initialize()
         {
-            ThumbnailImage = AssetPreview.GetAssetPreview(prefab);
+            ThumbnailImage = AssetPreview.GetAssetPreview(placementPrefab);
         }
     }
 }

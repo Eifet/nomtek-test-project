@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: GreenItem
   m_EditorClassIdentifier: 
   itemName: Green Item
-  prefab: {fileID: 4946105370034385344, guid: f2258026fa745544d92a330b2cf61e65, type: 3}
+  placementPrefab: {fileID: 4946105370034385344, guid: f2258026fa745544d92a330b2cf61e65,
+    type: 3}
+  stagePrefab: {fileID: 4677076363191411189, guid: d06e9dd2c5bd6f341b73ed3221d54e27,
+    type: 3}

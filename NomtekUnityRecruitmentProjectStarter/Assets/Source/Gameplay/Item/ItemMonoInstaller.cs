@@ -1,4 +1,5 @@
-﻿using Nomtek.Source.Gameplay.Item.Model;
+﻿using Nomtek.Source.Gameplay.Item.Controller;
+using Nomtek.Source.Gameplay.Item.Model;
 using UnityEngine;
 using Zenject;
 
@@ -13,6 +14,9 @@ namespace Nomtek.Source.Gameplay.Item
         {
             Container.BindInstance(itemListSo).AsTransient();
             Container.Bind<IItemModel>().To<ItemModel>().AsSingle();
+            Container.Bind<ISelectedItemModel>().To<SelectedItemModel>().AsSingle();
+
+            Container.BindInterfacesTo<ItemPlacingController>().AsSingle();
         }
     }
 }
