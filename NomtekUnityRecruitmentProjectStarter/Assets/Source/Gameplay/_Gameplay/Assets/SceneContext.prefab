@@ -33,6 +33,7 @@ Transform:
   - {fileID: 6157365900341128574}
   - {fileID: 323555454587925951}
   - {fileID: 7020617515185720585}
+  - {fileID: 3605249948831967637}
   m_Father: {fileID: 0}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -54,6 +55,7 @@ MonoBehaviour:
   - {fileID: 4442669812527179895}
   - {fileID: 323555454587925948}
   - {fileID: 7150937209997012519}
+  - {fileID: 3685843421311620456}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -204,7 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c68832a837d040d28f7538f87a58a4f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputHandler: {fileID: 0}
+  camera: {fileID: 0}
 --- !u!1 &3595925026166873404
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,3 +252,47 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemGridView: {fileID: 0}
+--- !u!1 &7951238834933036072
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3605249948831967637}
+  - component: {fileID: 3685843421311620456}
+  m_Layer: 0
+  m_Name: StageItemMonoInstaller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3605249948831967637
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7951238834933036072}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 323555454159342501}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3685843421311620456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7951238834933036072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 920ea18d53294a978bfe79074a34d91e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

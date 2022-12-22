@@ -1,10 +1,11 @@
 ﻿using Nomtek.Source.Gameplay.Controller;
 using Nomtek.Source.Gameplay.Item.Model;
 using Nomtek.Source.Gameplay.Model;
+using Source.Gameplay.StageItem.Model;
 using UnityEngine;
 using Zenject;
 
-namespace Nomtek.Source.Gameplay.Item.Controller
+namespace Nomtek.Source.Gameplay.StageItem.Controller
 {
     public class ItemPlacingController : IController
     {
@@ -13,41 +14,42 @@ namespace Nomtek.Source.Gameplay.Item.Controller
 
         [Inject]
         CameraModel cameraModel;
-        
+
         [Inject]
         ISelectedItemModel selectedItemModel;
+        
+        [Inject]
+        ISelectedStageItemModel selectedStageItemModel;
 
-        GameObject placingItem;
+        GameObject PlacingItem => selectedStageItemModel.SelectedStageItem.Data;
         Vector3 offset = new Vector3(0,.7f,0);
         bool placingMode;
         
         public void Initialize()
         {
-            selectedItemModel.SelectedItem.OnChanged += OnSelectedItemChanged;
+            selectedStageItemModel.SelectedStageItem.OnChanged += OnSelectedItemChanged;
             inputHandler.OnClick += OnClick;
             inputHandler.OnMousePositionChanged += OnMousePositionChanged;
 
-            OnSelectedItemChanged(selectedItemModel.SelectedItem.Data);
+            OnSelectedItemChanged(selectedStageItemModel.SelectedStageItem.Data);
         }
 
         public void Dispose()
         {
-            selectedItemModel.SelectedItem.OnChanged -= OnSelectedItemChanged;
+            selectedStageItemModel.SelectedStageItem.OnChanged -= OnSelectedItemChanged;
             inputHandler.OnClick -= OnClick;
             inputHandler.OnMousePositionChanged -= OnMousePositionChanged;
         }
 
-        void OnSelectedItemChanged(IItem item)
+        void OnSelectedItemChanged(GameObject _)
         {
-            if (item == null)
+            if (PlacingItem == null)
             {
                 placingMode = false;
-                Object.Destroy(placingItem);
                 return;
             }
 
-            placingItem = Object.Instantiate(item.PlacementPrefab);
-            placingItem.SetActive(false);
+            PlacingItem.SetActive(false);
             placingMode = true;
         }
 
@@ -59,13 +61,13 @@ namespace Nomtek.Source.Gameplay.Item.Controller
             var ray = cameraModel.MainCamera.ScreenPointToRay(mousePosition);
             if (Physics.Raycast(ray,out var hit, 100, LayerMask.GetMask("InteractPlane")))
             {
-                var stageItem = Object.Instantiate(selectedItemModel.SelectedItem.Data.StagePrefab);
-                stageItem.transform.position = hit.point + offset;
-                
-                Object.Destroy(placingItem);
-                placingItem = null;
-                placingMode = false;
+                var stagePrefab = selectedItemModel.SelectedItem.Data.StagePrefab;
+                var stageItem = Object.Instantiate(stagePrefab);
+                var placingPosition = hit.point + offset;
+                stageItem.transform.position = placingPosition;
+
                 selectedItemModel.SelectedItem.Data = null;
+                placingMode = false;
             }
         }
 
@@ -77,12 +79,12 @@ namespace Nomtek.Source.Gameplay.Item.Controller
             var ray = cameraModel.MainCamera.ScreenPointToRay(mousePosition);
             if (Physics.Raycast(ray,out var hit, 100, LayerMask.GetMask("InteractPlane")))
             {
-                placingItem.SetActive(true);
-                placingItem.gameObject.transform.position = hit.point + offset;
+                PlacingItem.SetActive(true);
+                PlacingItem.gameObject.transform.position = hit.point + offset;
             }
             else
             {
-                placingItem.SetActive(false);
+                PlacingItem.SetActive(false);
             }
         }
     }

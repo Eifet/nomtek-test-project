@@ -26,7 +26,6 @@ namespace Nomtek.Source.Gameplay.GameplayFlow.States
 
             inputHandler.OnInputCancel += OnCancel;
             
-            itemGridView.OnItemChosen += OnItemChosen;
             itemGridView.gameObject.SetActive(true);
         }
 
@@ -34,27 +33,12 @@ namespace Nomtek.Source.Gameplay.GameplayFlow.States
         {
             inputHandler.OnInputCancel -= OnCancel;
             
-            itemGridView.OnItemChosen -= OnItemChosen;
             itemGridView.gameObject.SetActive(false);
-        }
-
-        void OnItemChosen(IItem item)
-        {
-            Debug.Log($"OnItemChosen {item.ItemName}");
-            selectedItemModel.SelectedItem.Data = item;
-            itemGridView.CloseView();
-        }
-
-        void OnItemPlaced()
-        {
-            selectedItemModel.SelectedItem.Data = null;
-            itemGridView.OpenView();
         }
 
         void OnCancel()
         {
             selectedItemModel.SelectedItem.Data = null;
-            itemGridView.OpenView();
         }
     }
 }

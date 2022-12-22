@@ -23,6 +23,9 @@ namespace Nomtek.Source.Ui.ItemGridUi.View
         [Inject]
         IItemModel itemModel;
 
+        [Inject]
+        ISelectedItemModel selectedItemModel;
+
         IEnumerable<IGrouping<string, ItemViewController>> itemListGroups;
 
         void OnEnable()
@@ -30,6 +33,8 @@ namespace Nomtek.Source.Ui.ItemGridUi.View
             View.OnInputFieldChanged += OnInputFieldChanged;
 
             itemModel.ItemList.OnChanged += OnItemListChanged;
+            selectedItemModel.SelectedItem.OnChanged += OnItemSelected;
+            
             OnItemListChanged(itemModel.ItemList.Data);
         }
 
@@ -38,11 +43,8 @@ namespace Nomtek.Source.Ui.ItemGridUi.View
             View.OnInputFieldChanged -= OnInputFieldChanged;
 
             itemModel.ItemList.OnChanged -= OnItemListChanged;
+            selectedItemModel.SelectedItem.OnChanged -= OnItemSelected;
         }
-
-        public void OpenView() => View.OpenView();
-
-        public void CloseView() => View.CloseView();
 
         #region List management
 
@@ -72,7 +74,7 @@ namespace Nomtek.Source.Ui.ItemGridUi.View
 
         void OnItemClicked(IItem item)
         {
-            OnItemChosen?.Invoke(item);
+            selectedItemModel.SelectedItem.Data = item;
         }
 
         #endregion
@@ -107,6 +109,18 @@ namespace Nomtek.Source.Ui.ItemGridUi.View
                         item.gameObject.SetActive(false);
                 }
             }
+        }
+
+        #endregion
+
+        #region Selected Item management
+
+        void OnItemSelected(IItem item)
+        {
+            if (item == null)
+                View.OpenView();
+            else
+                View.CloseView();
         }
 
         #endregion
