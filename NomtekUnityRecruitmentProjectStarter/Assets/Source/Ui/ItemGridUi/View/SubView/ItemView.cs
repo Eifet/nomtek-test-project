@@ -8,14 +8,29 @@ namespace Nomtek.Source.Ui.ItemGridUi.View.SubView
 {
     public class ItemView : ViewMono
     {
+        public event Action OnClicked;
+        
         [SerializeField]
         TMP_Text title;
         
         [SerializeField]
         Image thumbnail;
 
+        [SerializeField]
+        Button button;
+
         Sprite sprite;
-        
+
+        void OnEnable()
+        {
+            button.onClick.AddListener(OnClick);
+        }
+
+        void OnDisable()
+        {
+            button.onClick.RemoveListener(OnClick);
+        }
+
         public void Configure(string itemText, Texture2D itemImage)
         {
             title.text = itemText;
@@ -37,6 +52,11 @@ namespace Nomtek.Source.Ui.ItemGridUi.View.SubView
         void DestroySprite()
         {
             Destroy(sprite);
+        }
+
+        void OnClick()
+        {
+            OnClicked?.Invoke();
         }
     }
 }

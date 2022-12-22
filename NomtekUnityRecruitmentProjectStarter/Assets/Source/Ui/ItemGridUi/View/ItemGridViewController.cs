@@ -11,6 +11,8 @@ namespace Nomtek.Source.Ui.ItemGridUi.View
 {
     public class ItemGridViewController : ViewControllerMono<ItemGridView>
     {
+        public event Action<IItem> OnItemChosen;
+        
         [SerializeField]
         ItemViewController itemViewPrefab;
         
@@ -43,8 +45,14 @@ namespace Nomtek.Source.Ui.ItemGridUi.View
         {
             var itemViewController = viewFactory.Create<ItemViewController>(itemViewPrefab.gameObject);
             itemViewController.Configure(item);
+            itemViewController.OnItemClicked += OnItemClicked;
             
             View.AddItemToList(itemViewController.transform);
+        }
+
+        void OnItemClicked(IItem item)
+        {
+            OnItemChosen?.Invoke(item);
         }
     }
 }

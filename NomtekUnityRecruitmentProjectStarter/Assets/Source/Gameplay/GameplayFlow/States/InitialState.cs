@@ -34,7 +34,7 @@ namespace Nomtek.Source.Gameplay.GameplayFlow.States
         //Artificially waiting for Unity to fetch thumbnails and wake up. 
         IEnumerator GoToNextStateWithDelay()
         {
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(2f);
             GoToNextState();
         }
 
