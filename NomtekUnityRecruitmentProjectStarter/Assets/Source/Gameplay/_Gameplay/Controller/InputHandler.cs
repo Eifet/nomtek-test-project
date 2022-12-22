@@ -5,7 +5,13 @@ using Zenject;
 
 namespace Nomtek.Source.Gameplay.Controller
 {
-    public class InputHandler
+    public interface IInputHandler
+    {
+        event Action<Vector2> OnClick; 
+        event Action OnInputCancel;
+    }
+    
+    public class InputHandler : IInputHandler
     {
         public event Action<Vector2> OnClick; 
         public event Action OnInputCancel;

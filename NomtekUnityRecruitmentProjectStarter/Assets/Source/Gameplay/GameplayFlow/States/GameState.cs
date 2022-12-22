@@ -12,7 +12,7 @@ namespace Nomtek.Source.Gameplay.GameplayFlow.States
         EndState nextState;
 
         [Inject]
-        InputHandler inputHandler;
+        IInputHandler inputHandler;
         
         [Inject]
         ItemGridViewController itemGridView;

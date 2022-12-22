@@ -8,7 +8,7 @@ namespace Nomtek.Source.Gameplay
     {
         public override void InstallBindings()
         {
-            Container.Bind<InputHandler>().AsSingle();
+            Container.Bind<IInputHandler>().To<InputHandler>().AsSingle();
         }
     }
 }
