@@ -33,6 +33,10 @@ namespace Nomtek.Source.Ui.ItemGridUi.View
             itemModel.ItemList.OnChanged -= OnItemListChanged;
         }
 
+        public void OpenView() => View.OpenView();
+
+        public void CloseView() => View.CloseView();
+
         void OnItemListChanged(List<IItem> items)
         {
             View.ClearList();
