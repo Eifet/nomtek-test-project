@@ -9,6 +9,7 @@ using Zenject;
 namespace Nomtek.Source.Gameplay.GameplayFlow.States
 {
     //A dummy implementation of Fsm.
+    //Initializing items and waiting for images to be fetched from Unity
     public class InitialState : MonoBehaviour
     {
         [SerializeField]

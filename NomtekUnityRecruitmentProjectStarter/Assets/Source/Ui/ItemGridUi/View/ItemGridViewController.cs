@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Nomtek.Source.Gameplay.Controller;
 using Nomtek.Source.Gameplay.Item.Model;
 using Nomtek.Source.Ui._Ui.Controller;
 using Nomtek.Source.Ui._Ui.View;
@@ -12,11 +13,12 @@ namespace Nomtek.Source.Ui.ItemGridUi.View
 {
     public class ItemGridViewController : ViewControllerMono<ItemGridView>
     {
-        public event Action<IItem> OnItemChosen;
-
         [SerializeField]
         ItemViewController itemViewPrefab;
 
+        [Inject]
+        IInputHandler inputHandler;
+        
         [Inject]
         ViewFactory viewFactory;
 
@@ -30,6 +32,7 @@ namespace Nomtek.Source.Ui.ItemGridUi.View
 
         void OnEnable()
         {
+            inputHandler.OnInputCancel += OnCancel;
             View.OnInputFieldChanged += OnInputFieldChanged;
 
             itemModel.ItemList.OnChanged += OnItemListChanged;
@@ -40,6 +43,7 @@ namespace Nomtek.Source.Ui.ItemGridUi.View
 
         void OnDisable()
         {
+            inputHandler.OnInputCancel -= OnCancel;
             View.OnInputFieldChanged -= OnInputFieldChanged;
 
             itemModel.ItemList.OnChanged -= OnItemListChanged;
@@ -59,6 +63,7 @@ namespace Nomtek.Source.Ui.ItemGridUi.View
                 itemList.Add(itemViewController);
             }
 
+            //grouping the list to make it at least a bit more efficient.
             itemListGroups = itemList.GroupBy(x => x.Item.ItemName.ToLowerInvariant());
         }
 
@@ -71,12 +76,7 @@ namespace Nomtek.Source.Ui.ItemGridUi.View
 
             return itemViewController;
         }
-
-        void OnItemClicked(IItem item)
-        {
-            selectedItemModel.SelectedItem.Value = item;
-        }
-
+        
         #endregion
 
         #region List filtering
@@ -115,6 +115,17 @@ namespace Nomtek.Source.Ui.ItemGridUi.View
 
         #region Selected Item management
 
+        void OnItemClicked(IItem item)
+        {
+            selectedItemModel.SelectedItem.Value = item;
+        }
+        
+        void OnCancel()
+        {
+            selectedItemModel.SelectedItem.Value = null;
+        }
+        
+        //Not calling directly from OnItemClicked, because it should be controlled by data events, not the controller method calls.
         void OnItemSelected(IItem item)
         {
             if (item == null)

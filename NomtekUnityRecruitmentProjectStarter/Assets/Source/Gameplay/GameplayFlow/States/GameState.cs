@@ -6,6 +6,7 @@ using Zenject;
 
 namespace Nomtek.Source.Gameplay.GameplayFlow.States
 {
+    //Kind of a main state. Manages Ui (could've managed all ui stuff like canceling or selecting the item, but sometimes it's okay to put the logic inside of view controller)
     public class GameState : MonoBehaviour
     {
         [SerializeField]
@@ -24,21 +25,12 @@ namespace Nomtek.Source.Gameplay.GameplayFlow.States
         {
             Debug.Log("GameState");
 
-            inputHandler.OnInputCancel += OnCancel;
-            
             itemGridView.gameObject.SetActive(true);
         }
 
         void OnDisable()
         {
-            inputHandler.OnInputCancel -= OnCancel;
-            
             itemGridView.gameObject.SetActive(false);
-        }
-
-        void OnCancel()
-        {
-            selectedItemModel.SelectedItem.Value = null;
         }
     }
 }
