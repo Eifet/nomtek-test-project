@@ -34,47 +34,44 @@ namespace Nomtek.Source.Gameplay.Item.Controller
             var eatableItems = stageItemModel.StageEatableItems;
             if (eatableItems.Count == 0)
             {
-                StopEat();
+                StopHunting();
                 return;
             }
             
             if (!eatableItems.Contains(currentEatableTarget)) 
-                GoToNextTarget();
+                GoHuntNextTarget();
         }
 
         GameObject FindClosestItem(List<GameObject> items)
         {
-            var minDistance = float.MaxValue;
-            var minItem = stageItemModel.StageEatableItems.First();
+            var closestDistance = float.MaxValue;
+            var closestItem = stageItemModel.StageEatableItems.First();
             foreach (var item in items)
             {
                 var distanceToItem = Vector3.Distance(transform.position, item.transform.position);
-                if (minDistance > distanceToItem)
+                if (closestDistance > distanceToItem)
                 {
-                    minDistance = distanceToItem;
-                    minItem = item;
+                    closestDistance = distanceToItem;
+                    closestItem = item;
                 }
             }
 
-            return minItem;
+            return closestItem;
         }
 
-        void GoEat()
-        {
-            navMeshAgent.SetDestination(currentEatableTarget.transform.position);
-        }
-
-        void StopEat()
-        {
-            navMeshAgent.ResetPath();
-        }
-
-        void GoToNextTarget()
+        void GoHuntNextTarget()
         {
             var eatableItems = stageItemModel.StageEatableItems;
             var closestTarget = FindClosestItem(eatableItems);
             currentEatableTarget = closestTarget;
-            GoEat();
+            
+            navMeshAgent.SetDestination(currentEatableTarget.transform.position);
+        }
+        
+        void StopHunting()
+        {
+            currentEatableTarget = null;
+            navMeshAgent.ResetPath();
         }
 
         void OnTriggerEnter(Collider other)
