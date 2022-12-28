@@ -29,7 +29,7 @@ namespace Nomtek.Source.Gameplay.StageItem.Controller
         IStageItemModel stageItemModel;
 
         GameObject PlacingItem => selectedStageItemModel.SelectedStageItem.Value;
-        Vector3 offset = new Vector3(0,.7f,0);
+        readonly Vector3 offset = new(0,.7f,0);
         bool placingMode;
         
         public void Initialize()
@@ -97,7 +97,7 @@ namespace Nomtek.Source.Gameplay.StageItem.Controller
         bool RaycastUnderMouse(Vector3 mousePosition, out RaycastHit hit)
         {
             var ray = cameraModel.MainCamera.ScreenPointToRay(mousePosition);
-            return Physics.Raycast(ray,out hit, 100, LayerMask.GetMask("InteractPlane"))
+            return Physics.Raycast(ray, out hit, 100, LayerMask.GetMask("InteractPlane"));
         }
     }
 }
