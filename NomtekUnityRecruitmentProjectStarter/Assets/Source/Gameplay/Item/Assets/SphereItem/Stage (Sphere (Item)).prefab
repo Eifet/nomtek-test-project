@@ -11,12 +11,12 @@ PrefabInstance:
     - target: {fileID: 4724888498252123288, guid: 2160cf61cbc2f7345873e89e9813ad37,
         type: 3}
       propertyPath: m_Name
-      value: Sphere (Item)
+      value: Stage (Sphere (Item))
       objectReference: {fileID: 0}
     - target: {fileID: 7224662617330878589, guid: 2160cf61cbc2f7345873e89e9813ad37,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7224662617330878589, guid: 2160cf61cbc2f7345873e89e9813ad37,
         type: 3}

@@ -15,5 +15,5 @@ MonoBehaviour:
   itemName: Red Item
   placementPrefab: {fileID: 2664518846162850190, guid: b2a8b0757e6ef9343bf182e3a3ca59ba,
     type: 3}
-  stagePrefab: {fileID: 5774054294318731756, guid: ee8c7df6c0eead94980ad493ea8789f2,
+  stagePrefab: {fileID: 8894810311126773863, guid: d69a5578a7476c248a38071abddd40c7,
     type: 3}
