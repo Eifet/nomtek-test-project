@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Nomtek.Source.Gameplay.StageItem.Model;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
 
-namespace Nomtek.Source.Gameplay.Item.Controller
+namespace Nomtek.Source.Gameplay.StageItem.Controller.Feature
 {
     public class CubeEaterFeatureController : MonoBehaviour
     {

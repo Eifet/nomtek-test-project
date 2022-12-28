@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace Nomtek.Source.Gameplay.Item.Controller
+namespace Nomtek.Source.Gameplay.StageItem.Controller.Feature
 {
     public interface IEatable
     {
