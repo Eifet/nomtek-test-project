@@ -1,6 +1,7 @@
 ﻿using Nomtek.Source.Gameplay.Controller;
 using Nomtek.Source.Gameplay.Item.Model;
-using Source.Gameplay.StageItem.Model;
+using Nomtek.Source.Gameplay.StageItem.Controller.Factory;
+using Nomtek.Source.Gameplay.StageItem.Model;
 using UnityEngine;
 using Zenject;
 
@@ -8,6 +9,9 @@ namespace Nomtek.Source.Gameplay.StageItem.Controller
 {
     public class SelectedStageItemController : IController
     {
+        [Inject]
+        IStageItemFactory stageItemFactory;
+        
         [Inject]
         ISelectedItemModel selectedItemModel;
 
@@ -26,14 +30,14 @@ namespace Nomtek.Source.Gameplay.StageItem.Controller
 
         void OnSelectedItemChanged(IItem item)
         {
-            if (selectedStageItemModel.SelectedStageItem.Data != null)
-                Object.Destroy(selectedStageItemModel.SelectedStageItem.Data);
+            if (selectedStageItemModel.SelectedStageItem.Value != null)
+                Object.Destroy(selectedStageItemModel.SelectedStageItem.Value);
 
             GameObject stageItem = null;
             if(item!=null)
-                stageItem = Object.Instantiate(item.PlacementPrefab);
+                stageItem = stageItemFactory.CreatePlacementItem(item);
             
-            selectedStageItemModel.SelectedStageItem.Data = stageItem;
+            selectedStageItemModel.SelectedStageItem.Value = stageItem;
         }
     }
 }

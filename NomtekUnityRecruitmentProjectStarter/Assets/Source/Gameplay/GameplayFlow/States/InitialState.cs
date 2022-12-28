@@ -33,7 +33,7 @@ namespace Nomtek.Source.Gameplay.GameplayFlow.States
 
         void OnItemListInitialized()
         {
-            itemModel.ItemList.Data = itemListSo.ItemList;
+            itemModel.ItemList.Value = itemListSo.ItemList;
             GoToNextState();
         }
         

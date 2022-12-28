@@ -35,7 +35,7 @@ namespace Nomtek.Source.Ui.ItemGridUi.View
             itemModel.ItemList.OnChanged += OnItemListChanged;
             selectedItemModel.SelectedItem.OnChanged += OnItemSelected;
             
-            OnItemListChanged(itemModel.ItemList.Data);
+            OnItemListChanged(itemModel.ItemList.Value);
         }
 
         void OnDisable()
@@ -74,7 +74,7 @@ namespace Nomtek.Source.Ui.ItemGridUi.View
 
         void OnItemClicked(IItem item)
         {
-            selectedItemModel.SelectedItem.Data = item;
+            selectedItemModel.SelectedItem.Value = item;
         }
 
         #endregion

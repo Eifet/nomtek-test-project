@@ -38,7 +38,7 @@ namespace Nomtek.Source.Gameplay.GameplayFlow.States
 
         void OnCancel()
         {
-            selectedItemModel.SelectedItem.Data = null;
+            selectedItemModel.SelectedItem.Value = null;
         }
     }
 }

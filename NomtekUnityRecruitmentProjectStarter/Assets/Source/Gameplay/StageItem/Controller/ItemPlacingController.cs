@@ -1,7 +1,8 @@
 ﻿using Nomtek.Source.Gameplay.Controller;
 using Nomtek.Source.Gameplay.Item.Model;
 using Nomtek.Source.Gameplay.Model;
-using Source.Gameplay.StageItem.Model;
+using Nomtek.Source.Gameplay.StageItem.Controller.Factory;
+using Nomtek.Source.Gameplay.StageItem.Model;
 using UnityEngine;
 using Zenject;
 
@@ -16,12 +17,18 @@ namespace Nomtek.Source.Gameplay.StageItem.Controller
         CameraModel cameraModel;
 
         [Inject]
+        IStageItemFactory stageItemFactory;
+
+        [Inject]
         ISelectedItemModel selectedItemModel;
         
         [Inject]
         ISelectedStageItemModel selectedStageItemModel;
 
-        GameObject PlacingItem => selectedStageItemModel.SelectedStageItem.Data;
+        [Inject]
+        IStageItemModel stageItemModel;
+
+        GameObject PlacingItem => selectedStageItemModel.SelectedStageItem.Value;
         Vector3 offset = new Vector3(0,.7f,0);
         bool placingMode;
         
@@ -31,7 +38,7 @@ namespace Nomtek.Source.Gameplay.StageItem.Controller
             inputHandler.OnClick += OnClick;
             inputHandler.OnMousePositionChanged += OnMousePositionChanged;
 
-            OnSelectedItemChanged(selectedStageItemModel.SelectedStageItem.Data);
+            OnSelectedItemChanged(selectedStageItemModel.SelectedStageItem.Value);
         }
 
         public void Dispose()
@@ -58,15 +65,15 @@ namespace Nomtek.Source.Gameplay.StageItem.Controller
             if(!placingMode)
                 return;
             
-            var ray = cameraModel.MainCamera.ScreenPointToRay(mousePosition);
-            if (Physics.Raycast(ray,out var hit, 100, LayerMask.GetMask("InteractPlane")))
+            if (RaycastUnderMouse(mousePosition, out var hit))
             {
-                var stagePrefab = selectedItemModel.SelectedItem.Data.StagePrefab;
-                var stageItem = Object.Instantiate(stagePrefab);
+                var item = selectedItemModel.SelectedItem.Value;
+                var stageItem = stageItemFactory.CreateStageItem(item);
                 var placingPosition = hit.point + offset;
                 stageItem.transform.position = placingPosition;
 
-                selectedItemModel.SelectedItem.Data = null;
+                stageItemModel.AddItem(stageItem);
+                selectedItemModel.SelectedItem.Value = null;
                 placingMode = false;
             }
         }
@@ -76,8 +83,7 @@ namespace Nomtek.Source.Gameplay.StageItem.Controller
             if(!placingMode)
                 return;
             
-            var ray = cameraModel.MainCamera.ScreenPointToRay(mousePosition);
-            if (Physics.Raycast(ray,out var hit, 100, LayerMask.GetMask("InteractPlane")))
+            if (RaycastUnderMouse(mousePosition, out var hit))
             {
                 PlacingItem.SetActive(true);
                 PlacingItem.gameObject.transform.position = hit.point + offset;
@@ -86,6 +92,12 @@ namespace Nomtek.Source.Gameplay.StageItem.Controller
             {
                 PlacingItem.SetActive(false);
             }
+        }
+
+        bool RaycastUnderMouse(Vector3 mousePosition, out RaycastHit hit)
+        {
+            var ray = cameraModel.MainCamera.ScreenPointToRay(mousePosition);
+            return Physics.Raycast(ray,out hit, 100, LayerMask.GetMask("InteractPlane"))
         }
     }
 }

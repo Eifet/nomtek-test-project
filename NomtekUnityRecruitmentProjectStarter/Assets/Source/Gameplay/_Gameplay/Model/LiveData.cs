@@ -7,15 +7,15 @@ namespace Nomtek.Source.Gameplay.Model
     {
         public event Action<T> OnChanged;
 
-        T data;
-        public T Data
+        T value;
+        public T Value
         {
-            get => data;
+            get => value;
 
             set
             {
-                data = value;
-                OnChanged?.Invoke(data);
+                this.value = value;
+                OnChanged?.Invoke(this.value);
             }
         }
     }
