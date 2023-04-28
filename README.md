@@ -1,5 +1,7 @@
 # nomtek-test-project
 
+Link to the task description: https://nomtek.notion.site/Unity-Test-Project-1f78c86965c04955b8d082862e689766
+
 The target project resolution is 1920:1080.
 
 Main assemblies:
